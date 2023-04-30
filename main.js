@@ -33,3 +33,34 @@ const ThirdRowRu = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'/','Sh
 const ThirdRowRuShift = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",'/','Shift']
 const ThirdRowRuShiftCaps = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'/','Shift']
 const ThirdRowRuCaps = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",'/','Shift']
+
+function createNode(nodeType,...classNames){
+    let elem = document.createElement(nodeType);
+    elem.className = classNames.join(' ')
+    return elem
+} 
+const wrapper = createNode('div','centralizer')
+document.body.append(wrapper);
+
+const wrapperDiv = document.querySelector('.centralizer');
+
+const header = createNode('p','title')
+header.innerHTML='RSS Виртуальная Клавиатура';
+wrapperDiv.append(header);
+
+const textarea = createNode('textarea','boby--textarea', 'textarea')
+wrapperDiv.append(textarea);
+
+const keyabord = createNode('div', 'body--keyboard', 'keyboard')
+wrapperDiv.append(keyabord)
+
+const description= createNode('p','description')
+description.innerHTML='Клавиатура создана в операционной системе Windows';
+wrapperDiv.append(description)
+
+const lang =createNode('p','language');
+lang.innerHTML='Для переключения языка комбинация: левыe ctrl + alt'
+wrapperDiv.append(lang)
+
+
+
