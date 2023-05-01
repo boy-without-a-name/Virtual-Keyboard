@@ -1,6 +1,6 @@
 .centralizer {
     margin: 0 auto;
-    font-family: "Trebuchet MS", "Helvetica", sans-serif
+    font-family: sans-serif
 }
 
 .textarea {
@@ -83,7 +83,7 @@
     background-color: #222222
 }
 
-.keyboard .Tab {
+.Tab {
     width: 50px
 }
 

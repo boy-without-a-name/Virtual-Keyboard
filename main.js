@@ -316,8 +316,11 @@ keys.addEventListener('mouseup',(event)=>{
     inpupTextarea.addEventListener('keydown',(event)=>{
         if (event.code =='CapsLock'){
             chekCaps(2,0)
+  
         }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
            chekShift(0,1,2,3)
+           let divCurrent=document.querySelector('.'+event.code)
+           divCurrent.classList.toggle('active')
         }
         else{let divCurrent=document.querySelector('.'+event.code)
         divCurrent.classList.toggle('active')
@@ -400,6 +403,8 @@ keys.addEventListener('mouseup',(event)=>{
            }
         }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
             chekShift(1,0,3,2)
+            let divCurrent=document.querySelector('.'+event.code)
+        divCurrent.classList.remove('active')
          }
         else {let divCurrent=document.querySelector('.'+event.code)
         divCurrent.classList.remove('active')}
