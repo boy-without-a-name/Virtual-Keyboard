@@ -69,11 +69,11 @@
     transition: border-radius 0.3s, background-color 0.3s
 }
 
-.keyboard .key:hover {
+.key:hover {
     background: #79aa89
 }
 
-.keyboard .key.active {
+.key.active {
     background-color: #2cfd72;
     border-radius: 50px
 }

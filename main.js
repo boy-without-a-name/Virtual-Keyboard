@@ -7,9 +7,9 @@ const DigitRowRuShift =["Ё","!",'"',"№",";","%",":","?","*","(",")","_","+","
 const DigitRowRuCaps = ["Ё", 1,2,3,4,5,6,7,8,9,0,"-","=","Backspace"]
 const DigitRowRuShiftCaps =["ё","!",'"',"№",";","%",":","?","*","(",")","_","+","Backspace"]
 
-const FirstRowEn = ['Tab','q','w','e','r','t','y','u','i','o','p','[',']','\'','Del']
+const FirstRowEn = ['Tab','q','w','e','r','t','y','u','i','o','p','[',']','\\','Del']
 const FirstRowEnShift =['Tab','Q','W','E','R','T','Y','U','I','O','P','{','}','|','Del']
-const FirstRowEnCaps =['Tab','Q','W','E','R','T','Y','U','I','O','P','[',']','\'','Del']
+const FirstRowEnCaps =['Tab','Q','W','E','R','T','Y','U','I','O','P','[',']','\\','Del']
 const FirstRowEnShiftCaps = ['Tab','q','w','e','r','t','y','u','i','o','p','{','}','|','Del']
 const FirstRowRu = ['Tab',"й","ц","у","к","е","н","г","ш","щ","з","х","ъ","\'"]
 const FirstRowRuShift = ['Tab',"Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ","/"]
@@ -25,22 +25,22 @@ const SecondRowRuShift = ['CapsLock',"Ф","Ы","В","А","П","Р","О","Л","Д
 const SecondRowRuCaps = ['CapsLock',"Ф","Ы","В","А","П","Р","О","Л","Д","Ж","Э",'Enter']
 const SecondRowRuShiftCaps =['CapsLock',"ф","ы","в","а","п","р","о","л","д","ж","э",'Enter']
 
-const ThirdRowEn = ['Shift','z','x','c','v','b','n','m',',','.','/','','Shift']
-const ThirdRowEnShift = ['Shift','Z','X','C','V','B','N','M','<','>','/','','Shift']
-const ThirdRowCaps = ['Shift','Z','X','C','V','B','N','M',',','.','/','','Shift']
-const ThirdRowEnShiftCaps =['Shift','z','x','c','v','b','n','m','<','>','/','','Shift']
-const ThirdRowRu = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'/','Shift']
-const ThirdRowRuShift = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",'/','Shift']
-const ThirdRowRuShiftCaps = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'/','Shift']
-const ThirdRowRuCaps = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",'/','Shift']
-const LastRow =['Ctrl','Win','Alt','','Alt','','','','Ctrl']
+const ThirdRowEn = ['Shift','z','x','c','v','b','n','m',',','.','/','▲','Shift']
+const ThirdRowEnShift = ['Shift','Z','X','C','V','B','N','M','<','>','?','▲','Shift']
+const ThirdRowCaps = ['Shift','Z','X','C','V','B','N','M',',','.','/','▲','Shift']
+const ThirdRowEnShiftCaps =['Shift','z','x','c','v','b','n','m','<','>','?','▲','Shift']
+const ThirdRowRu = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'/','▲','Shift']
+const ThirdRowRuShift = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",',','▲','Shift']
+const ThirdRowRuShiftCaps = ['Shift',"я","ч","с","м","и","т","ь","б","ю",'.','▲','Shift']
+const ThirdRowRuCaps = ['Shift',"Я","Ч","С","М","И","Т","Ь","Б","Ю",',','▲','Shift']
+const LastRow =['Ctrl','Win','Alt','','Alt','◄','▼','►','Ctrl']
 const Ru=[DigitRowRu,DigitRowRuShift,DigitRowRuCaps,DigitRowRuShiftCaps,FirstRowRu,FirstRowRuShift,FirstRowRuCaps, FirstRowRuShiftCaps,
     SecondRowRu,SecondRowRuShift,SecondRowRuCaps,SecondRowRuShiftCaps,ThirdRowRu,ThirdRowRuShift,ThirdRowRuCaps,ThirdRowRuShiftCaps, LastRow, LastRow, LastRow, LastRow]
 
 const Eng=[DigitRowEn, DigitRowEnShift,DigitRowEnCaps,DigitRowEnShiftCaps,FirstRowEn,FirstRowEnShift,FirstRowEnCaps,FirstRowEnShiftCaps,
     SecondRowEn,SecondRowEnShift,SecondRowEnCaps, SecondRowEnShiftCaps,ThirdRowEn,ThirdRowEnShift,ThirdRowCaps,ThirdRowEnShiftCaps, LastRow, LastRow, LastRow, LastRow]
 
-function createNode(nodeType,...classNames){
+createNode = (nodeType,...classNames)=>{
     let elem = document.createElement(nodeType);
     elem.className = classNames.join(' ')
     return elem
@@ -77,7 +77,7 @@ const LastRowKey = ['ControlLeft','MetaLeft','AltLeft','Space','AltRight','Arrow
 const keys=document.querySelector('.keyboard')
 
 
-let fillValues = function(array,number,node){
+CreateValues =(array,number,node)=> {
     let rows=createNode('div','row');
     keys.append(rows)
     const row=document.querySelectorAll('.row')[node]
@@ -111,7 +111,7 @@ let fillValues = function(array,number,node){
         en.append(caseDownEn)
         count++
         let caseUpEn =createNode('span','caseUp','hidden')
-        caseUpRu.innerHTML=`${Eng[count][i]}`;
+        caseUpEn.innerHTML=`${Eng[count][i]}`;
         en.append(caseUpEn)
         count++
         let capsEn =createNode('span','caps','hidden')
@@ -123,8 +123,134 @@ let fillValues = function(array,number,node){
         en.append(capsShiftEn)
     }   
 } 
-fillValues(DigitRowKey,0,0)
-fillValues(FirstRowKey,4,1)
-fillValues(SecondRowKey,8,2)
-fillValues(ThirdRowKey,12,3)
-fillValues(LastRowKey,16,4)
+CreateValues(DigitRowKey,0,0)
+CreateValues(FirstRowKey,4,1)
+CreateValues(SecondRowKey,8,2)
+CreateValues(ThirdRowKey,12,3)
+CreateValues(LastRowKey,16,4)
+
+const inpupTextarea = document.querySelector('.textarea');
+
+function getCaretPos(obj) {
+    obj.focus();
+    if(obj.selectionStart) return obj.selectionStart;
+    else if (document.selection) {
+         var sel = document.selection.createRange();
+         var clone = sel.duplicate();
+         sel.collapse(true);
+         clone.moveToElementText(obj);
+         clone.setEndPoint('EndToEnd', sel);
+         return clone.text.length;
+    }
+    return 0;
+}
+localStorage.setItem('caps', 'false')
+localStorage.setItem('lang','en')
+
+chekShift=(val1,val2,val3,val4)=>{
+{
+        if(localStorage.getItem('caps') == 'false' ){
+            let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
+ 
+            for(let y=0;y<i.length;y++){
+                let children=i[y].children[val1]
+                let childrenCaseUp=i[y].children[val2]
+                children.classList.toggle('hidden');
+                childrenCaseUp.classList.remove('hidden');
+            }
+
+        } else{
+            let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
+ 
+            for(let y=0;y<i.length;y++){
+                let children=i[y].children[val3]
+                let childrenCaseUp=i[y].children[val4]
+                children.classList.toggle('hidden');
+                childrenCaseUp.classList.remove('hidden');
+            }
+        }
+}
+}
+chekCaps=(val1, val2)=> {
+        if(localStorage.getItem('caps') == 'false' ){
+            let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
+            localStorage.setItem('caps', 'true')
+            for(let y=0;y<i.length;y++){
+                let children=i[y].children[val2]
+                let childrenCaseUp=i[y].children[val1]
+                children.classList.toggle('hidden');
+                childrenCaseUp.classList.remove('hidden');
+            }
+    } else{
+        let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
+        localStorage.setItem('caps', 'false')
+        parent.classList.remove('active')
+            for(let y=0;y<i.length;y++){
+                let children=i[y].children[val1]
+                let childrenCaseUp=i[y].children[val2]
+                children.classList.toggle('hidden');
+                childrenCaseUp.classList.remove('hidden');
+    }
+}}
+possition=(v)=>{
+    let pos = getCaretPos(inpupTextarea);
+    if(pos == inpupTextarea.value.length){
+        inpupTextarea.value +=v  
+    } else if(pos!=1){
+        inpupTextarea.value =(inpupTextarea.value.slice(0,pos) + v + inpupTextarea.value.slice(pos,inpupTextarea.value.length))
+    } else(inpupTextarea.value=v+inpupTextarea.value)
+}
+
+
+CapsClick=()=>{keys.addEventListener('click',(event)=>{
+    if(event.target.closest('.CapsLock')){
+  
+}
+})}
+keys.addEventListener('mousedown',(event)=>{
+    parent = event.target.closest('.key')
+    if(event.target.closest('.ShiftLeft')||event.target.closest('.ShiftRight')){
+       chekShift(0,1,2,3)
+       parent.classList.toggle('active')
+    }
+    else if(event.target.closest('.key')){
+        parent.classList.toggle('active')
+    }
+})
+keys.addEventListener('mouseup',(event)=>{
+    parent = event.target.closest('.key')
+        if(event.target.closest('.Tab')){
+            possition('    ')
+            parent.classList.remove('active')
+        
+        } else if(event.target.closest('.Enter')){
+            possition('\n');
+            parent.classList.remove('active')
+        } else if(event.target.closest('.Space')){
+            possition(' ');
+            parent.classList.remove('active')
+        } else if(event.target.closest('.Backspace')){
+            let pos = getCaretPos(inpupTextarea)
+                inpupTextarea.value=(inpupTextarea.value.slice(0,pos-1) + inpupTextarea.value.slice(pos,inpupTextarea.value.length));
+                parent.classList.remove('active');
+        }else if(event.target.closest('.Delete')){
+            let pos = getCaretPos(inpupTextarea)
+            parent.classList.remove('active');
+            if(pos !=inpupTextarea.value.length){
+                inpupTextarea.value=(inpupTextarea.value.slice(0,pos) + inpupTextarea.value.slice(pos+1,inpupTextarea.value.length))
+            } 
+        } else if(event.target.closest('.ShiftLeft')||event.target.closest('.ShiftRight')){
+            chekShift(1,0,3,2)
+            parent.classList.remove('active');
+        } else if(event.target.closest('.ControlLeft') ||event.target.closest('.MetaLeft')
+        ||event.target.closest('.AltLeft')  ||event.target.closest('.AltRight')  ||event.target.closest('.ControlRight')){
+            parent.classList.remove('active');
+        }else if(event.target.closest('.CapsLock')){ 
+            chekCaps(2,0)
+        }
+        else if(event.target.closest('.key')){
+            possition(event.target.innerHTML);
+            parent.classList.remove('active');
+        }
+    }
+    )
