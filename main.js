@@ -131,7 +131,7 @@ CreateValues(LastRowKey,16,4)
 
 const inpupTextarea = document.querySelector('.textarea');
 
-function getCaretPos(obj) {
+getCaretPos=(obj)=> {
     obj.focus();
     if(obj.selectionStart) return obj.selectionStart;
     else if (document.selection) {
@@ -151,7 +151,7 @@ chekShift=(val1,val2,val3,val4)=>{
 {
         if(localStorage.getItem('caps') == 'false' ){
             let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
- 
+
             for(let y=0;y<i.length;y++){
                 let children=i[y].children[val1]
                 let childrenCaseUp=i[y].children[val2]
@@ -184,7 +184,6 @@ chekCaps=(val1, val2)=> {
     } else{
         let i=document.querySelectorAll('.'+localStorage.getItem('lang'))
         localStorage.setItem('caps', 'false')
-        parent.classList.remove('active')
             for(let y=0;y<i.length;y++){
                 let children=i[y].children[val1]
                 let childrenCaseUp=i[y].children[val2]
@@ -246,6 +245,8 @@ keys.addEventListener('mouseup',(event)=>{
         ||event.target.closest('.AltLeft')  ||event.target.closest('.AltRight')  ||event.target.closest('.ControlRight')){
             parent.classList.remove('active');
         }else if(event.target.closest('.CapsLock')){ 
+            if(localStorage.getItem('caps') == 'true')
+            {parent.classList.remove('active')}
             chekCaps(2,0)
         }
         else if(event.target.closest('.key')){
@@ -253,4 +254,49 @@ keys.addEventListener('mouseup',(event)=>{
             parent.classList.remove('active');
         }
     }
+    )
+  
+    
+    inpupTextarea.addEventListener('keydown',(event)=>{
+        if (event.code =='CapsLock'){
+            chekCaps(2,0)
+        }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
+           chekShift(0,1,2,3)
+        }
+        let divCurrent=document.querySelector('.'+event.code)
+        divCurrent.classList.toggle('active')
+        if(event.code =='Tab'){
+            event.preventDefault()
+            possition('    ')
+        }else if(event.code=='ArrowLeft'){
+            event.preventDefault()
+            possition('◄')
+        }else if(event.code=='ArrowDown'){
+            event.preventDefault()
+            possition('▼')
+        } else if(event.code=='ArrowRight'){
+            event.preventDefault()
+            possition('►')
+        }else if(event.code=='ArrowUp'){
+            event.preventDefault()
+            possition('▲')
+        } else if(event.code=='ControlLeft' ||event.code=='.MetaLeft'
+        ||event.code=='AltLeft'  || event.code=='AltRight' ||event.code=='ControlRight'){
+            event.preventDefault()
+        }
+    }
+    )
+    inpupTextarea.addEventListener('keyup',(event)=>{
+        if (event.code =='CapsLock'){
+            let divCurrent=document.querySelector('.'+event.code)
+            if(localStorage.getItem('caps') == 'true'){
+                divCurrent.classList.toggle('active')
+            }else{divCurrent.classList.remove('active')
+           }
+        }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
+            chekShift(1,0,3,2)
+         }
+        let divCurrent=document.querySelector('.'+event.code)
+        divCurrent.classList.remove('active')
+         }
     )
