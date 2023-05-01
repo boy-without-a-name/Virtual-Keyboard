@@ -78,7 +78,7 @@
     border-radius: 50px
 }
 
-.keyboard .AltLeft,.keyboard .AltRight,.keyboard .ArrowUp,.keyboard .ArrowLeft,.keyboard .ArrowDown,.keyboard .ArrowRight,.keyboard .Backspace,.keyboard .CapsLock,.keyboard .ControlLeft,.keyboard .ControlRight,.keyboard .Delete,.keyboard .Enter,.keyboard .ShiftLeft,.keyboard .ShiftRight,.keyboard .Tab,.keyboard .MetaLeft {
+ .AltLeft,.AltRight, .ArrowUp,.ArrowLeft, .ArrowDown, .ArrowRight, .Backspace, .CapsLock, .ControlLeft,.ControlRight,.Delete, .Enter, .ShiftLeft, .ShiftRight, .Tab, .MetaLeft {
     font-weight: 600;
     background-color: #222222
 }
@@ -87,18 +87,17 @@
     width: 50px
 }
 
-.keyboard .Backspace,.keyboard .CapsLock,.keyboard .ShiftLeft {
+.Backspace,.CapsLock,.ShiftLeft {
     width: 100px
 }
 
-.keyboard .Delete {
+.Delete {
     width: 44px
 }
-
-.keyboard .Enter,.keyboard .ShiftRight {
+.Enter,
+.ShiftRight {
     width: 86px
 }
-
-.keyboard .Space {
+.Space {
     width: 330px
 }

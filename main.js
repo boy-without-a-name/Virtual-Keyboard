@@ -11,10 +11,10 @@ const FirstRowEn = ['Tab','q','w','e','r','t','y','u','i','o','p','[',']','\\','
 const FirstRowEnShift =['Tab','Q','W','E','R','T','Y','U','I','O','P','{','}','|','Del']
 const FirstRowEnCaps =['Tab','Q','W','E','R','T','Y','U','I','O','P','[',']','\\','Del']
 const FirstRowEnShiftCaps = ['Tab','q','w','e','r','t','y','u','i','o','p','{','}','|','Del']
-const FirstRowRu = ['Tab',"й","ц","у","к","е","н","г","ш","щ","з","х","ъ","\'"]
-const FirstRowRuShift = ['Tab',"Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ","/"]
-const FirstRowRuCaps = ['Tab',"Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ","\'"]
-const FirstRowRuShiftCaps = ['Tab',"й","ц","у","к","е","н","г","ш","щ","з","х","ъ","/"]
+const FirstRowRu = ['Tab',"й","ц","у","к","е","н","г","ш","щ","з","х","ъ",'\\','Del']
+const FirstRowRuShift = ['Tab',"Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ",'\\','Del']
+const FirstRowRuCaps = ['Tab',"Й","Ц","У","К","Е","Н","Г","Ш","Щ","З","Х","Ъ",'\\','Del']
+const FirstRowRuShiftCaps = ['Tab',"й","ц","у","к","е","н","г","ш","щ","з","х","ъ",'\\','Del']
 
 const SecondRowEn = ['CapsLock', 'a','s','d','f','g','h','j','k','l',';',"'",'Enter']
 const SecondRowEnShift = ['CapsLock', 'A','S','D','F','G','H','J','K','L',':','"','Enter']
@@ -123,11 +123,68 @@ CreateValues =(array,number,node)=> {
         en.append(capsShiftEn)
     }   
 } 
-CreateValues(DigitRowKey,0,0)
-CreateValues(FirstRowKey,4,1)
-CreateValues(SecondRowKey,8,2)
-CreateValues(ThirdRowKey,12,3)
-CreateValues(LastRowKey,16,4)
+CreateValuesRu =(array,number,node)=> {
+    let rows=createNode('div','row');
+    keys.append(rows)
+    const row=document.querySelectorAll('.row')[node]
+    for(let i=0;i<array.length;i++){
+        let nodes=createNode('div', 'key',`${array[i]}`)
+        row.append(nodes);
+        let button = document.querySelector('.'+`${array[i]}`) 
+        let rus = createNode('span','rus')
+        button.append(rus)
+        let en = createNode('span','en','hidden')
+        button.append(en)
+        let count=number;
+        let caseDownRu =createNode('span','caseDown')
+        caseDownRu.innerHTML=`${Ru[count][i]}`;
+        rus.append(caseDownRu)
+        count++
+        let caseUpRu =createNode('span','caseUp','hidden')
+        caseUpRu.innerHTML=`${Ru[count][i]}`;
+        rus.append(caseUpRu)
+        count++
+        let capsRu =createNode('span','caps','hidden')
+        capsRu.innerHTML=`${Ru[count][i]}`;
+        rus.append(capsRu)
+        count++
+        let capsShiftRu =createNode('span','shift-caps','hidden')
+        capsShiftRu.innerHTML=`${Ru[count][i]}`;
+        rus.append(capsShiftRu)
+        count=number;
+        let caseDownEn =createNode('span','caseDown','hidden')
+        caseDownEn.innerHTML=`${Eng[count][i]}`;
+        en.append(caseDownEn)
+        count++
+        let caseUpEn =createNode('span','caseUp','hidden')
+        caseUpEn.innerHTML=`${Eng[count][i]}`;
+        en.append(caseUpEn)
+        count++
+        let capsEn =createNode('span','caps','hidden')
+        capsEn.innerHTML=`${Eng[count][i]}`;
+        en.append(capsEn)
+        count++
+        let capsShiftEn =createNode('span','shift-caps','hidden')
+        capsShiftEn.innerHTML=`${Eng[count][i]}`;
+        en.append(capsShiftEn)
+    }   
+} 
+createKeybords=()=>{
+    if(localStorage.getItem('lang')=='rus'){
+        CreateValuesRu(DigitRowKey,0,0)
+        CreateValuesRu(FirstRowKey,4,1)
+        CreateValuesRu(SecondRowKey,8,2)
+        CreateValuesRu(ThirdRowKey,12,3)
+        CreateValuesRu(LastRowKey,16,4)
+    } else{
+        CreateValues(DigitRowKey,0,0)
+        CreateValues(FirstRowKey,4,1)
+        CreateValues(SecondRowKey,8,2)
+        CreateValues(ThirdRowKey,12,3)
+        CreateValues(LastRowKey,16,4)
+    }
+}
+createKeybords()
 
 const inpupTextarea = document.querySelector('.textarea');
 
@@ -145,7 +202,6 @@ getCaretPos=(obj)=> {
     return 0;
 }
 localStorage.setItem('caps', 'false')
-localStorage.setItem('lang','en')
 
 chekShift=(val1,val2,val3,val4)=>{
 {
@@ -229,7 +285,7 @@ keys.addEventListener('mouseup',(event)=>{
             possition(' ');
             parent.classList.remove('active')
         } else if(event.target.closest('.Backspace')){
-            let pos = getCaretPos(inpupTextarea)
+           let pos = getCaretPos(inpupTextarea)
                 inpupTextarea.value=(inpupTextarea.value.slice(0,pos-1) + inpupTextarea.value.slice(pos,inpupTextarea.value.length));
                 parent.classList.remove('active');
         }else if(event.target.closest('.Delete')){
@@ -263,7 +319,7 @@ keys.addEventListener('mouseup',(event)=>{
         }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
            chekShift(0,1,2,3)
         }
-        let divCurrent=document.querySelector('.'+event.code)
+        else{let divCurrent=document.querySelector('.'+event.code)
         divCurrent.classList.toggle('active')
         if(event.code =='Tab'){
             event.preventDefault()
@@ -283,20 +339,69 @@ keys.addEventListener('mouseup',(event)=>{
         } else if(event.code=='ControlLeft' ||event.code=='.MetaLeft'
         ||event.code=='AltLeft'  || event.code=='AltRight' ||event.code=='ControlRight'){
             event.preventDefault()
+            if(event.ctrlKey&&event.altKey){
+                console.log(1)
+                if(localStorage.getItem('lang')=='en')
+                {localStorage.setItem('lang','rus')
+                    let En=document.querySelectorAll('.en')
+                    let rus=document.querySelectorAll('.rus')
+                if (localStorage.getItem('caps')=='false'){
+                    for(let i=0; i<En.length;i++){
+                        let children= En[i].children[0]
+                        let childrenRu= rus[i].children[0]
+                        En[i].classList.toggle('hidden')
+                        children.classList.toggle('hidden')
+                        rus[i].classList.remove('hidden')
+                        childrenRu.classList.remove('hidden')
+                }
+                } else{
+                    for(let i=0; i<En.length;i++){
+                        let children= En[i].children[2]
+                        let childrenRu= rus[i].children[2]
+                        En[i].classList.toggle('hidden')
+                        children.classList.toggle('hidden')
+                        rus[i].classList.remove('hidden')
+                        childrenRu.classList.remove('hidden')
+                }
+            } 
+            } else{
+                localStorage.setItem('lang','en')
+                let En=document.querySelectorAll('.en')
+                let rus=document.querySelectorAll('.rus')
+                if (localStorage.getItem('caps')=='false'){
+                for(let i=0; i<En.length;i++){
+                let children= rus[i].children[0]
+                let childrenEn= En[i].children[0]
+                rus[i].classList.toggle('hidden')
+                children.classList.toggle('hidden')
+                En[i].classList.remove('hidden')
+                childrenEn.classList.remove('hidden')
         }
-    }
+        } else{
+            for(let i=0; i<En.length;i++){
+                let children= rus[i].children[2]
+                let childrenEn= En[i].children[2]
+                rus[i].classList.toggle('hidden')
+                children.classList.toggle('hidden')
+                En[i].classList.remove('hidden')
+                childrenEn.classList.remove('hidden')
+            }
+        }
+        }
+    }}}}
     )
     inpupTextarea.addEventListener('keyup',(event)=>{
-        if (event.code =='CapsLock'){
+        if (event.code =='CapsLock'){  
             let divCurrent=document.querySelector('.'+event.code)
             if(localStorage.getItem('caps') == 'true'){
-                divCurrent.classList.toggle('active')
-            }else{divCurrent.classList.remove('active')
+                divCurrent.classList.toggle('active');
+            } else{
+                divCurrent.classList.remove('active')
            }
         }else if (event.code =='ShiftLeft'||event.code =='ShiftRight'){
             chekShift(1,0,3,2)
          }
-        let divCurrent=document.querySelector('.'+event.code)
-        divCurrent.classList.remove('active')
+        else {let divCurrent=document.querySelector('.'+event.code)
+        divCurrent.classList.remove('active')}
          }
     )
